@@ -158,7 +158,7 @@ MEDIA_URL = '/'
 
 MY_DATE_FORMAT = "d-m-Y \o H:i"
 
-EMAIL_HOST_USER = ''
+EMAIL_HOST_USER = 'vovatrap@gmail.com'
 
 AUTH_USER_EMAIL_UNIQUE = True
 
@@ -168,7 +168,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'wablezyb1992'
 
 EMAIL_USE_TLS = True
 
