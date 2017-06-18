@@ -153,7 +153,7 @@ MEDIA_ROOT = 'media'
 
 IMAGEFIT_ROOT = ''
 
-MEDIA_URL = '/home/vol/project/blog16types/type16/media/'
+MEDIA_URL = '/media/'
 
 MY_DATE_FORMAT = "d-m-Y \o H:i"
 
