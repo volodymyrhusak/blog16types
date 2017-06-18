@@ -25,7 +25,7 @@ SECRET_KEY = '4%$7-*n!+a45k-vs%l--_96*$0oz)cstspko4t!b23jda#prg8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['blog16types.herokuapp.com']
 
 
 # Application definition
@@ -172,3 +172,7 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = 'JobMice'
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
