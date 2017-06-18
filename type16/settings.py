@@ -153,7 +153,7 @@ MEDIA_ROOT = 'media'
 
 IMAGEFIT_ROOT = ''
 
-MEDIA_URL = ''
+MEDIA_URL = '/'
 
 MY_DATE_FORMAT = "d-m-Y \o H:i"
 
