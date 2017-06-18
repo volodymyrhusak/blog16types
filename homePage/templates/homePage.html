@@ -1,0 +1,202 @@
+{% extends 'main.html' %}
+{% load imagefit %}
+{% load dateFormat %}
+{% block content %}
+<!-- Fade Bs-carousel
+    ======================================== -->
+
+    <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#bs-carousel" data-slide-to="1"></li>
+            <li data-target="#bs-carousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item slides active">
+                <!-- Overlay -->
+                <div class="overlay"></div>
+                <div class="slide-1"></div>
+                <div class="hero">
+                    <h1>Ви креативні</h1>
+                    <h3>Почни свій проект</h3>
+                    <a href="{% url 'courses'%}" class="butn">Більше</a>
+                </div>
+            </div>
+            <div class="item slides">
+                <div class="slide-2"></div>
+                <div class="hero">
+                    <h1>Ви розумні</h1>
+                    <h3>Почни свій проект</h3>
+                    <a href="{% url 'courses'%}" class="butn">Більше</a>
+                </div>
+            </div>
+            <div class="item slides">
+                <div class="slide-3"></div>
+                <div class="hero">
+                    <h1>Ви чудові</h1>
+                    <h3>Почни свій проект</h3>
+                    <a href="{% url 'courses'%}" class="butn">Більше</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--  jumbotron
+    ======================================== -->
+    <header class="jumbotron"><!-- jumbotron -->
+        <div class="container"><!-- container -->
+            <div class="row"><!-- row -->
+                <div class='col-sm-8'>
+                    <h1>
+                        <span class="highlight">Блог</span>
+                        про Людей
+                        <br>та Відносини</h1>
+                    <p style="padding:15px;"></p>
+                    <blockquote>
+                        <p>"Живемо між людей, а не між ангелів", - Борісов Володимир</p>
+                    </blockquote>
+                    <p>
+                        <em>Цитати річ геть некорисна якщо у вас немає прикладного застосування.
+                        Дійсно живемо між людей і не завжди відносини і співпраця є ефективними і комфортними.
+                        Частіше за все віддаємо все на волю випадковості і не можемо впливати на процес відносин свідомо.
+                        Але насправді кожна людина може більше....
+                        Власне про те що може людина в спілкуванні з іншими і є цей блог...
+                        <br>Я, Канюга Павло і це мій блог</em></p>
+                </div>
+                <div class='col-sm-4'>
+                    <div class="buttons">
+                        <a class="butn" href="{% url 'aboutMe'%}">Про мене</a>
+                        <a class="butn" href="{% url 'blog'%}">Блог</a>
+                    </div>
+                </div>
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </header><!-- end jumbotron -->
+
+ <!--  Blog Section
+    ======================================== -->
+    <div id="home-blog">
+        <div class="container"> <!-- container -->
+            <div class="section-header">
+                <h2>Останні новини з<span class="highlight"><strong> Блогу</strong></span></h2>
+                <!-- <h5><em>We design and build functional and beautiful websites</em></h5> -->
+                <!-- <div class="fancy"><span><img src="img/logo_big.png" alt="..."></span></div> -->
+            </div>
+        </div>
+        <div id="blog-post" class="gray-bg"> <!-- fullwidth gray background -->
+            <div class="container"><!-- container -->
+                <div class="row"> <!-- row -->
+                    <div class="col-md-6"> <!-- Left content col 6 -->
+                        {%for post in posts|slice:":3"%}
+                        <div class="post-wrap"> <!-- Post Wrapper -->
+                            <div class="media post"> <!-- post wrap -->
+                                <div class="media-left">
+                                    <a href="blog-post.html"> <!-- link to your post single page -->
+                                      <img class="media-object" src="{{post.image.path|media_resize:'120x150,crop'}}" alt="..."> <!-- Your Post Image -->
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <p class="date small">{{post.createTime|dateFormating:"MY_DATE_FORMAT"}}</p>
+                                    <a href="blog-post.html">
+                                        <h5 class="heading media-heading"><strong>{{post.title}}</strong></h5>
+                                    </a>
+                                    <p class="blog-text">{{post.body|slice:":165"}}</p>
+                                </div>
+                            </div><!-- end post wrap -->
+
+                            <div class="post-meta"> <!-- Meta details -->
+                                <ul class="list-inline metas pull-left"> <!-- post metas -->
+                                    <li class="comments"><a href="{% url 'post' postName=post.title%}">{{post.postcommentmodel__count}} коментарів</a></li> <!-- meta comments -->
+                                    <li class="more"><a href="{% url 'post' postName=post.title%}">Більше</a></li> <!-- read more link -->
+                                </ul>
+                                <ul class="list-inline meta-detail pull-right"> <!-- user meta interaction -->
+                                    <div class="fb-like" data-href="{% url 'post' postName=post.title%}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div> <!-- like button -->
+                                    <li class="views"><i class="fa fa-eye"></i> {{post.views}}</li> <!-- no. of views -->
+                                </ul>
+                            </div><!-- end Meta details -->
+                        </div><!-- end Post Wrapper -->
+                        {%endfor%}
+
+                    </div> <!-- end Left content col 6 -->
+
+                    <div class="col-md-6"> <!-- right content col 6 -->
+                        {%for post in posts|slice:"3:6"%}
+                        <div class="post-wrap"> <!-- Post Wrapper -->
+                            <div class="media post"> <!-- post wrap -->
+                                <div class="media-left">
+                                    <a href="blog-post.html"> <!-- link to your post single page -->
+                                      <img class="media-object" src="{{post.image.path|media_resize:'120x150,crop'}}" alt="..."> <!-- Your Post Image -->
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <p class="date small">{{post.createTime|dateFormating:"MY_DATE_FORMAT"}}</p>
+                                    <a href="blog-post.html">
+                                        <h5 class="heading media-heading"><strong>{{post.title}}</strong></h5>
+                                    </a>
+                                    <p class="blog-text">{{post.body|slice:":165"}}</p>
+                                </div>
+                            </div><!-- end post wrap -->
+
+                            <div class="post-meta"> <!-- Meta details -->
+                                <ul class="list-inline metas pull-left"> <!-- post metas -->
+                                    <li class="comments"><a href="{% url 'post' postName=post.title%}">{{post.postcommentmodel__count}} коментарів</a></li> <!-- meta comments -->
+                                    <li class="more"><a href="{% url 'post' postName=post.title%}">Більше</a></li> <!-- read more link -->
+                                </ul>
+                                <ul class="list-inline meta-detail pull-right"> <!-- user meta interaction -->
+                                    <div class="fb-like" data-href="{% url 'post' postName=post.title%}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div> <!-- like button -->
+                                    <li class="views"><i class="fa fa-eye"></i> {{post.views}}</li> <!-- no. of views -->
+                                </ul>
+                            </div><!-- end Meta details -->
+                        </div><!-- end Post Wrapper -->
+                        {%endfor%}
+                    </div><!-- end right content col 6 -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div> <!-- end fullwidth gray background -->
+    </div>
+
+<!-- Fade Bs-carousel
+    ======================================== -->
+
+    <div class="carousel fade-carousel-2 slide" data-ride="carousel" data-interval="4000" id="bs-carousel-2">
+
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#bs-carousel-2" data-slide-to="0" class="active"></li>
+            <li data-target="#bs-carousel-2" data-slide-to="1"></li>
+            <li data-target="#bs-carousel-2" data-slide-to="2"></li>
+        </ol>
+
+
+        <div class="carousel-inner"><!-- wrapper for slides -->
+            <div class="item slides active">
+                <!-- Overlay -->
+                <div class="overlay"></div>
+                <div class="slide-1"></div>
+                <div class="hero">
+                    <h2>Відгуки клієнтів</h2>
+                    <h4><em>"Дуже задоволений курсом про взаємовідносини. Воно того вартувало!"</em></h4>
+                </div>
+            </div>
+            <div class="item slides">
+                <div class="slide-2"></div>
+                <div class="hero">
+                    <h2>Відгуки клієнтів</h2>
+                    <h4><em>"Дуже задоволений курсом про взаємовідносини. Воно того вартувало!"</em></h4>
+                </div>
+            </div>
+            <div class="item slides">
+                <div class="slide-3"></div>
+                <div class="hero">
+                    <h2>Відгуки клієнтів</h2>
+                    <h4><em>"Дуже задоволений курсом про взаємовідносини. Воно того вартувало!"</em></h4>
+                </div>
+            </div>
+        </div> <!-- end wrapper for slides -->
+    </div>
+
+{% endblock %}

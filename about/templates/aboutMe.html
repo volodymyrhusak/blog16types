@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<!-- Page Header
+    ===========================================-->
+    <div id="header">
+        <div class="container"> <!-- container -->
+            <h1>Хто я</h1>
+        </div><!-- end container -->
+    </div>
+
+<!--  jumbotron
+    ========================================== -->
+    <header class="jumbotron about_me"><!-- jumbotron -->
+        <div class="container"><!-- container -->
+            <div class="row"><!-- row -->
+                <div class='col-sm-8'>
+                    <p style="padding:15px;"></p>
+                    <blockquote>
+                        <p>{{me.slogan}}</p>
+                    </blockquote>
+                        <p><em>Мене звати Павло</em></p>
+                        <p class="text_me"><em>
+                        {{me.text}}
+                        </em></p>
+                </div>
+                   </div><!-- end row -->
+        </div><!-- end container -->
+    </header><!-- end jumbotron -->
+
+{% endblock %}

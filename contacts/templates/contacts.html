@@ -1,0 +1,99 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<!-- Page Header
+    ===========================================-->
+    <div id="header" class="consult">
+        <div class="container"> <!-- container -->
+            <h1>Контакти</h1>
+        </div><!-- end container -->
+    </div>
+
+<!-- Contact Section
+    ================================================== -->
+    <div id="contact">
+        <div class="container"> <!-- container -->
+            <div class="section-header">
+                <h2>Наші<span class="highlight"><strong> Контакти</strong></span></h2>
+            </div>
+        </div><!-- end container -->
+        <div class="container"><!-- container -->
+            <div class="row"> <!-- outer row -->
+                <div class="col-md-10 col-md-offset-1"> <!-- col 10 with offset 1 to centered -->
+                    <div class="row"> <!-- nested row -->
+
+                        <!-- contact detail using col 4 -->
+                        <div class="col-md-4">
+                            <div class="contact-detail">
+                                <i class="fa fa-map-marker"></i>
+                                <h4>{{contacts.address}}</h4> <!-- address -->
+                            </div>
+                        </div>
+                        <!-- contact detail using col 4 -->
+                        <div class="col-md-4">
+                            <div class="contact-detail">
+                                <i class="fa fa-envelope-o"></i>
+                                <h4>{{contacts.email}}</h4><!-- email add -->
+                            </div>
+                        </div>
+
+                        <!-- contact detail using col 4 -->
+                        <div class="col-md-4">
+                            <div class="contact-detail">
+                                <i class="fa fa-phone"></i>
+                                <h4>{{contacts.phone}}</h4> <!-- phone no. -->
+                            </div>
+                        </div>
+
+                    </div> <!-- end nested row -->
+                </div> <!-- end col 10 with offset 1 to centered -->
+            </div><!-- end outer row -->
+
+            <div class="row text-center"> <!-- contact form outer row with centered text-->
+                <div class="col-md-10 col-md-offset-1"> <!-- col 10 with offset 1 to centered -->
+                    <form id="contact-form" method="POST" class="form" name="sentMessage" novalidate> <!-- form wrapper -->
+                        {% csrf_token %}
+                        {{formErrors.errors.as_json}}
+                        <div class="row"> <!-- nested inner row -->
+                            <!-- Input your name -->
+                            <div class="col-md-4">
+                                <div class="form-group"> <!-- Your name input -->
+                                    <input name="name" type="text" autocomplete="off" class="form-control" placeholder="Ваше ім'я *" id="name" required data-validation-required-message="Введіть Ваше ім'я">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
+                            <!-- Input your email -->
+                            <div class="col-md-4">
+                                <div class="form-group"> <!-- Your email input -->
+                                    <input name="email" type="email" autocomplete="off" class="form-control" placeholder="Ваш Email *" id="email" required data-validation-required-message="Введіть Ваше ім'я email">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
+                            <!-- Input your Phone no. -->
+                            <div class="col-md-4">
+                                <div class="form-group"> <!-- Your email input -->
+                                    <input name="phone" type="text" autocomplete="off" class="form-control" placeholder="Ваш номер телефону *" id="phone" required data-validation-required-message="Введіть Ваш номер телефону">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
+                        </div><!-- end nested inner row -->
+
+                        <!-- Message Text area -->
+                        <div class="form-group"> <!-- Your email input -->
+                            <textarea name="text" class="form-control" rows="7" placeholder="Напишіть ..." id="message" required data-validation-required-message="Напишіть повідомлення"></textarea>
+                            <p class="help-block text-danger"></p>
+                            <div id="success"></div>
+                        </div>
+                        <button type="submit" class="btn btn-default en-btn">Відправити</button> <!-- Send button -->
+                    </form><!-- end form wrapper -->
+                </div><!-- end col 10 with offset 1 to centered -->
+            </div> <!-- end contact form outer row with centered text-->
+        </div><!-- end container -->
+    </div>
+
+{% endblock %}

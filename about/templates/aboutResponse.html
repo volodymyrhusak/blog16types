@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+
+<!-- Page Header
+    ===========================================-->
+    <div id="header">
+        <div class="container"> <!-- container -->
+            <h1>Відгуки</h1>
+        </div><!-- end container -->
+    </div>
+
+<!-- Response
+    ===========================================-->
+    <div class='container response'> <!-- container -->
+            <div  class="col-xs-12">
+                <h4 class="text-uppercase">Тут пишемо відгуки</h4>
+                <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="5"></div>
+            </div>
+    </div><!-- end container -->
+
+
+{% endblock %}

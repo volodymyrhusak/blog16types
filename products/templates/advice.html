@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!-- Page Header
+    ===========================================-->
+    <div id="header" class="consult">
+        <div class="container"> <!-- container -->
+            <h1>Консультування</h1>
+        </div><!-- end container -->
+    </div>
+
+<!-- Сonsulting
+    ===========================================-->
+    <div class='container consulting'> <!-- container -->
+            <div  class="col-xs-12">
+                {%for category in categories%}
+                <div class="wrap_block">
+                    <h4 class="text-uppercase">{{category.name}}</h4>
+                    <ul class="list-unstyled bullet-lists">
+                        {%for advice in advices%}
+                            {%if category.id == advice.category.id%}
+                            <li><span class="fa fa-circle"></span> {{advice.text}}</li>
+                            {%endif%}
+                        {%endfor%}
+                    </ul>
+                </div>
+                {%endfor%}
+
+                <div class="buttons">
+                    <a class="butn" href="{% url 'contacts' %}">Зконтактуватися</a>
+                </div>
+            </div>
+    </div><!-- end container -->
+
+{% endblock %}

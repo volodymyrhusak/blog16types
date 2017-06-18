@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<!-- Page Header
+    ===========================================-->
+    <div id="header" class="consult">
+        <div class="container"> <!-- container -->
+            <h1>Навчальні курси</h1>
+        </div><!-- end container -->
+    </div>
+
+<!-- Courses
+    ===========================================-->
+    <div class='container courses'> <!-- container -->
+            <div  class="col-xs-12">
+                {%for course in courses%}
+                <div class="wrap_block">
+                    <h4 class="text-uppercase">Курс "{{course.name}}"</h4>
+                    <p>{{course.descr}}
+                        <br>
+                        На курсі :
+                    </p>
+                    <ul class="list-unstyled bullet-lists">
+                        {%for onCourse in onCourses%}
+                        {%if onCourse.category.id == course.id  %}
+                        <li><span class="fa fa-circle"></span> {{onCourse.text}}</li>
+                        {%endif%}
+                        {%endfor%}
+                    </ul>
+                    <p>{{course.descrBelow}}</p>
+                    <p><a href="">План курсу завантажити можна <span>тут</span></a></p>
+                </div>
+                {%endfor%}
+
+                <div class="buttons">
+                    <a class="butn" href="{% url 'contacts' %}">Зареєструватися</a>
+                </div>
+            </div>
+    </div><!-- end container -->
+
+{% endblock %}

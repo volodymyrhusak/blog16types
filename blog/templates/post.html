@@ -1,0 +1,208 @@
+{% extends 'main.html' %}
+{% load dateFormat %}
+{% block content %}
+
+<!-- Page Header
+    ================================================== -->
+    <div id="header">
+        <div class="container"> <!-- container -->
+            <h1>Статті Блогу</h1>
+        </div><!-- end container -->
+    </div>
+
+<!--  Blog Section
+    ======================================== -->
+    <div id="home-blog" class="blog-post">
+        <div class="container"> <!-- container -->
+            <div class="section-header">
+                <h2>Останні новини з<span class="highlight"><strong> Блогу</strong></span></h2>
+            </div>
+        </div>
+        <div id="blog-post"> <!-- fullwidth gray background -->
+            <div class="container"><!-- container -->
+                <div class="row"> <!-- row -->
+                    <div class="col-md-6 col-md-offset-1"> <!-- Left Blogrol col 6 -->
+                        <div class="post-wrap"> <!-- Post Wrapper -->
+                            <p class="date small">{{post.createTime|date:MY_DATE_FORMAT}}</p>
+                            <a href="{% url 'post' postName=post.title%}">
+                                <h5 class="heading media-heading"><strong>{{post.title}}</strong></h5>
+                            </a>
+
+                            <ul class="list-inline metas pull-left"> <!-- post metas -->
+                                <li><a href="#comments" class="scroll">{{countComments}} Comments</a></li> <!-- meta comments -->
+                            </ul>
+
+                            <img src="{{post.image.path}}" class="img-responsive" alt="...">
+
+                            <p class="blog-text">{{post.body}}</p>
+
+                        </div><!-- end Post Wrapper -->
+                        <!--<div class='container response'> &lt;!&ndash; container &ndash;&gt;-->
+                            <!--<div  class="col-xs-12">-->
+                                <!--<div class="fb-like" data-href="https://www.facebook.com/easyrelations" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>-->
+                            <!--</div>-->
+                        <!--</div>&lt;!&ndash; end container &ndash;&gt;-->
+
+                        <div class='container response'> <!-- container -->
+                            <div  class="col-xs-12">
+                                <div class="fb-like" data-href="{% url 'post' postName=post.title%}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+                            </div>
+                        </div><!-- end container -->
+                        <!-- Response
+                        ===========================================-->
+                        <div class='container response'> <!-- container -->
+                            <div  class="col-xs-12">
+                                <h4 class="text-uppercase">Тут пишемо відгуки</h4>
+                                <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="5"></div>
+                            </div>
+                        </div><!-- end container -->
+                        <div id="comments" class="comment">
+                            <h4 class="text-uppercase">Коментарі <span class="comments">{{countComments}}</span></h4>
+                            {%for comment in comments %}
+                            <div class="media comment-block"> <!-- Comment Block #1 -->
+                                <div class="media-left media-top">
+                                    <a href="#">
+                                      <img class="media-object" src="http://placehold.it/90x90" alt="...">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <small class="date pull-right">{{comment.createTime|date:MY_DATE_FORMAT}}</small>
+                                    <h5 class="media-heading">Post by <a href="#"> {{comment.userName}}</a></h5>
+                                    <div class="clearfix"></div>
+                                    <div class="comment_post">
+                                    {{comment.body}}
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <!--<a href="#" class="pull-right text-uppercase">Відповісти</a>-->
+                                </div>
+                            </div>
+
+                            {%endfor%}
+
+                        </div>
+                        <div class="text-left"> <!-- Blogrol Pagination -->
+                            <nav>
+                                <ul class="pagination">
+                                    {% if comments.has_previous %}
+                                    <li>
+                                      <a href="{% url 'post' postName=post.title%}?page={{ comments.previous_page_number }}" aria-label="Previous">
+                                        <span aria-hidden="true">Назад</span>
+                                      </a>
+                                    </li>
+                                    {%endif%}
+                                    {% for num in comments.paginator.page_range%}
+                                        {% ifequal num comments.number %}
+                                            <li><a href="#" class="active">{{ num }}</a></li>
+                                        {% else %}
+                                            {% if num == 1 %}
+                                                <li><a href="{% url 'post' postName=post.title%}">{{ num }}</a></li>
+                                            {% else %}
+                                                {% if num|add:"-3" <= comments.number and comments.number <= num|add:"3" %}
+                                                    <li><a href="{% url 'post' postName=post.title%}?page={{ num }}">{{ num }}</a></li>
+                                                {% elif num|divisibleby:"10" or num == comments.paginator.num_pages %}
+                                                    <li><a href="{% url 'post' postName=post.title%}?page={{ num }}">{{ num }}</a></li>
+                                                {% endif %}
+                                            {%endif%}
+                                        {% endifequal %}
+                                    {% endfor %}
+                                    {% if comments.has_next %}
+                                    <li>
+                                      <a href="{% url 'post' postName=post.title%}?page={{ comments.next_page_number }}" aria-label="Next">
+                                        <span aria-hidden="true">Вперед</span>
+                                      </a>
+                                    </li>
+                                    {%endif%}
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <div class="comment">
+                            <h4 class="text-uppercase">Залишити коментар</h4>
+                            <form id="contact-form" class="form" method="POST">
+                                {% csrf_token %}
+                                {{formErrors.errors.as_json}}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" name="userName" class="form-control" placeholder="Ваше ім'я">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" name="Email" class="form-control" placeholder="Ваш Email">
+                                    </div>
+                                </div>
+                                <textarea name="body" class="form-control" rows="6" placeholder="Ваш коментар..."></textarea>
+                                <button type="submit" class="btn btn-default en-btn">Відправити</button>
+                            </form>
+                        </div>
+                    </div> <!-- end Left content col 6 -->
+                    <div class="col-md-4"> <!-- Blog Sidebar -->
+                        <div class="sidebar">
+                            <div class="widget search"> <!-- Search Widget -->
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Пошук ...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><span class="fa fa-search"></span></button>
+                                    </span>
+                                </div><!-- /input-group -->
+                            </div> <!-- end Search Widget -->
+
+                            <div class="widget archive"> <!-- Archive Widget -->
+                                <h4 class="text-uppercase">Архів</h4>
+                                <ul class="list-unstyled bullet-lists">
+                                    {%for post in postsArchive%}
+                                    <li><a href="{% url 'blog'%}?month={{post.month.month}}&year={{post.year.year}}"><span class="fa fa-circle"></span> {{post.month.month|dateFormating}} {{post.year.year}}</a></li>
+                                    {%endfor%}
+
+                                </ul>
+                            </div>
+                            <div class="widget post-tab"> <!-- Posts Tab Widget -->
+                                <div role="tabpanel">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href="#popular" aria-controls="popular" role="tab" data-toggle="tab">Популярне</a></li><!-- Popular Posts -->
+                                        <li role="presentation"><a href="#recent" aria-controls="recent" role="tab" data-toggle="tab">Останнє</a></li><!-- Recent Posts -->
+                                        <li role="presentation"><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">Коментоване</a></li><!-- Comments -->
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id="popular"><!-- Popular Posts -->
+                                            <div class="list-group">
+                                                {%for popularPost in popularPosts%}
+                                                <a href="{% url 'post' postName=popularPost.title%}" class="list-group-item">
+                                                    <p class="small">{{popularPost.createTime|date:MY_DATE_FORMAT}}</p>
+                                                    <h5 class="media-heading"><strong>{{popularPost.title}}</strong></h5>
+                                                </a>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="recent"><!-- Recent Posts -->
+                                            <div class="list-group">
+                                                {%for lastPost in lastPosts %}
+                                                <a href="{% url 'post' postName=lastPost.title%}" class="list-group-item">
+                                                    <p class="small">{{lastPost.createTime|date:MY_DATE_FORMAT}}</p>
+                                                    <h5 class="media-heading"><strong>{{lastPost.title}}</strong></h5>
+                                                </a>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="comment"><!-- Comments -->
+                                            <div class="list-group">
+                                                {%for lastComment in lastComments%}
+                                                <a href="{% url 'post' postName=lastComment.post.title%}" class="list-group-item">
+                                                    <p class="small">{{lastComment.userName}} <strong>Comments</strong> on:</p>
+                                                    <h5 class="media-heading"><strong>{{lastComment.post.title}}</strong></h5>
+                                                </a>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end right content col 4 -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div> <!-- end fullwidth gray background -->
+    </div>
+
+
+{% endblock %}

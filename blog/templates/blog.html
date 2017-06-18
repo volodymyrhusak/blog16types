@@ -1,0 +1,164 @@
+{% extends 'main.html' %}
+{% load imagefit %}
+{% load dateFormat %}
+{% block content %}
+
+<!-- Fade Bs-carousel
+    ======================================== -->
+<!-- Page Header
+    ================================================== -->
+    <div id="header">
+        <div class="container"> <!-- container -->
+            <h1>Блог</h1>
+        </div><!-- end container -->
+    </div>
+
+<!--  Blog Section
+    ======================================== -->
+    <div id="home-blog" class="blog">
+        <div class="container"> <!-- container -->
+            <div class="section-header">
+                <h2>Останні новини з<span class="highlight"><strong> Блогу</strong></span></h2>
+            </div>
+        </div>
+        <div id="blog-post"> <!-- fullwidth gray background -->
+            <div class="container"><!-- container -->
+                <div class="row"> <!-- row -->
+                    <div class="col-md-6 col-md-offset-1"> <!-- Left Blogrol col 8 -->
+                        {%for post in posts%}
+                        <div class="post-wrap"> <!-- Post Wrapper -->
+                            <div class="media post"> <!-- post wrap -->
+                                <div class="media-left">
+                                    <a href="{% url 'post' postName=post.title%}"> <!-- link to your post single page -->
+                                      <img class="media-object" src="{{post.image.path|media_resize:'120x150,crop' }}" alt="..."> <!-- Your Post Image -->
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <p class="date small">{{post.createTime|date:MY_DATE_FORMAT}}</p>
+                                    <a href="{% url 'post' postName=post.title%}">
+                                        <h5 class="heading media-heading"><strong>{{post.title}}</strong></h5>
+                                    </a>
+                                    <p class="blog-text">{{post.body|slice:":165"}}</p>
+                                </div>
+                            </div><!-- end post wrap -->
+                            <div class="post-meta"> <!-- Meta details -->
+                                <ul class="list-inline metas pull-left"> <!-- post metas -->
+                                    <li class="comments"><a href="{% url 'post' postName=post.title%}">{{post.postcommentmodel__count}} коментарів</a></li> <!-- meta comments -->
+                                    <li class="more"><a href="{% url 'post' postName=post.title%}">Більше</a></li> <!-- read more link -->
+                                </ul>
+                                <ul class="list-inline meta-detail pull-right"> <!-- user meta interaction -->
+                                    <div class="fb-like" data-href="{% url 'post' postName=post.title%}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div> <!-- like button -->
+                                    <li class="views"><i class="fa fa-eye"></i> {{post.views}}</li> <!-- no. of views -->
+                                </ul>
+                            </div><!-- end Meta details -->
+                        </div><!-- end Post Wrapper -->
+                        {%endfor%}
+
+                        <div class="text-left"> <!-- Blogrol Pagination -->
+                            <nav>
+                                <ul class="pagination">
+                                    {% if posts.has_previous %}
+                                    <li>
+                                      <a href="{% url 'blog'%}?page={{ posts.previous_page_number }}" aria-label="Previous">
+                                        <span aria-hidden="true">Назад</span>
+                                      </a>
+                                    </li>
+                                    {%endif%}
+                                    {% for num in posts.paginator.page_range%}
+                                        {% ifequal num posts.number %}
+                                            <li><a href="#" class="active">{{ num }}</a></li>
+                                        {% else %}
+                                            {% if num == 1 %}
+                                                <li><a href="{% url 'blog'%}">{{ num }}</a></li>
+                                            {% else %}
+                                                {% if num|add:"-3" <= posts.number and posts.number <= num|add:"3" %}
+                                                    <li><a href="{% url 'blog'%}?page={{ num }}">{{ num }}</a></li>
+                                                {% elif num|divisibleby:"10" or num == posts.paginator.num_pages %}
+                                                    <li><a href="{% url 'blog'%}?page={{ num }}">{{ num }}</a></li>
+                                                {% endif %}
+                                            {%endif%}
+                                        {% endifequal %}
+                                    {% endfor %}
+                                    {% if posts.has_next %}
+                                    <li>
+                                      <a href="{% url 'blog'%}?page={{ posts.next_page_number }}" aria-label="Next">
+                                        <span aria-hidden="true">Вперед</span>
+                                      </a>
+                                    </li>
+                                    {%endif%}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div> <!-- end Left content col 8 -->
+                    <div class="col-md-4"> <!-- Blog Sidebar -->
+                        <div class="sidebar">
+                            <div class="widget search"> <!-- Search Widget -->
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Пошук ...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><span class="fa fa-search"></span></button>
+                                    </span>
+                                </div><!-- /input-group -->
+                            </div> <!-- end Search Widget -->
+
+                            <div class="widget archive"> <!-- Archive Widget -->
+                                <h4 class="text-uppercase">Архів</h4>
+                                <ul class="list-unstyled bullet-lists">
+                                    {%for post in postsArchive%}
+                                    <li><a href="{% url 'blog'%}?month={{post.month.month}}&year={{post.year.year}}"><span class="fa fa-circle"></span> {{post.month.month|dateFormating}} {{post.year.year}}</a></li>
+                                    {%endfor%}
+                                </ul>
+                            </div>
+
+                            <div class="widget post-tab"> <!-- Posts Tab Widget -->
+                                <div role="tabpanel">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href="#popular" aria-controls="popular" role="tab" data-toggle="tab">Популярне</a></li><!-- Popular Posts -->
+                                        <li role="presentation"><a href="#recent" aria-controls="recent" role="tab" data-toggle="tab">Останнє</a></li><!-- Recent Posts -->
+                                        <li role="presentation"><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">Коментоване</a></li><!-- Comments -->
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id="popular"><!-- Popular Posts -->
+                                            <div class="list-group">
+                                                {%for popularPost in popularPosts%}
+                                                <a href="{% url 'post' postName=popularPost.title%}" class="list-group-item">
+                                                    <p class="small">{{popularPost.createTime|date:MY_DATE_FORMAT}}</p>
+                                                    <h5 class="media-heading"><strong>{{popularPost.title}}</strong></h5>
+                                                </a>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="recent"><!-- Recent Posts -->
+                                            <div class="list-group">
+                                                {%for lastPost in lastPosts %}
+                                                <a href="{% url 'post' postName=lastPost.title%}" class="list-group-item">
+                                                    <p class="small">{{lastPost.createTime|date:MY_DATE_FORMAT}}</p>
+                                                    <h5 class="media-heading"><strong>{{lastPost.title}}</strong></h5>
+                                                </a>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="comment"><!-- Comments -->
+                                            <div class="list-group">
+                                                {%for lastComment in lastComments%}
+                                                <a href="{% url 'post' postName=lastComment.post.title%}" class="list-group-item">
+                                                    <p class="small">{{lastComment.userName}} <strong>Comments</strong> on:</p>
+                                                    <h5 class="media-heading"><strong>{{lastComment.post.title}}</strong></h5>
+                                                </a>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end right content col 4 -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div> <!-- end fullwidth gray background -->
+    </div>
+
+
+{% endblock %}

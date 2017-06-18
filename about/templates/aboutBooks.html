@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<!-- Page Header
+    ===========================================-->
+    <div id="header">
+        <div class="container"> <!-- container -->
+            <h1>Книги котрі прочитав сам і всім рекомендую</h1>
+        </div><!-- end container -->
+    </div>
+
+<!-- Books
+    ===========================================-->
+    <div class='container books'> <!-- container -->
+            <div  class="col-xs-12">
+                <h4 class="text-uppercase">Книги котрі рекомендую прочитати</h4>
+                <ul class="list-unstyled bullet-lists">
+                    {%for book in books%}
+                    <li><span class="fa fa-circle"></span> {{book.author}} "{{book.bookName}}"</li>
+                    {%endfor%}
+                </ul>
+            </div>
+    </div><!-- end container -->
+
+{% endblock %}

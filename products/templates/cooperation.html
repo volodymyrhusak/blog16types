@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<!-- Page Header
+    ===========================================-->
+    <div id="header">
+        <div class="container"> <!-- container -->
+            <h1>Співпраця</h1>
+        </div><!-- end container -->
+    </div>
+
+<!-- cooperation
+    ===========================================-->
+    <div class='container cooperation'> <!-- container -->
+            <div  class="col-xs-12 col-md-6">
+                <div class="wrap_block">
+                    <p><em>Я відкритий до нових форм співпраці і з радістю розгляну Ваші пропозиції.</p>
+                    <br>
+                    <p>Можливо Ви не до кінця розумієте можливості моєї методики - тому запитуйте email: <a href="mailto:{{EMAIL_HOST_USER}}">{{EMAIL_HOST_USER}}</a> </p>
+                    <br>
+                    <p>Або можете обрати будь які інші моменти комунікації в пункті <a href="{% url 'contacts'%}">Контакти</a></em></p>
+                </div>
+            </div>
+    </div><!-- end container -->
+
+{% endblock %}

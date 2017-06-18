@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!-- Page Header
+    ===========================================-->
+    <div id="header" class="consult">
+        <div class="container"> <!-- container -->
+            <h1>Про методику</h1>
+        </div><!-- end container -->
+    </div>
+
+<!-- Method
+    ===========================================-->
+    <div class='container method'> <!-- container -->
+        <div  class="col-xs-12">
+            <div class="wrap_block">
+                <p>Соціоніка — концепція на перетині психології та соціології, запропонована у 1970-х роках литовською радянською вченою в галузі економіки Аушрою   Ауґустінавічюте на основі типології особистостей Карла Юнга та праць  польського психіатра Антонія Кемпінського про інформаційний метаболізм!
+                </p>
+                <p>Використовується в :</p>
+                <ul class="list-unstyled bullet-lists">
+                    {% for parent in inUseParent%}
+                    <li><span class="fa fa-circle"></span> {{parent.text}}
+                        {%for child in inUseChild %}
+                                {%if parent.id == child.parent.id and forloop.counter == 1 %}
+                                <ul class="list-unstyled bullet-lists">
+                                    <li><span class="fa fa-circle"></span> {{child.text}}</li>
+
+                                {%elif parent.id == child.parent.id%}
+                                    <li><span class="fa fa-circle"></span> {{child.text}}</li>
+                                {%endif%}
+
+                        {%endfor%}
+                    {%if parent.id == child.parent.id%}
+                                    </ul>
+                    {%endif%}
+                        </li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+    </div><!-- end container -->
+
+{% endblock %}
