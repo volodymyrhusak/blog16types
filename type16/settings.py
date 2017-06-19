@@ -150,7 +150,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-MEDIA_ROOT = ''
+MEDIA_ROOT = 'media'
 
 IMAGEFIT_ROOT = ''
 
