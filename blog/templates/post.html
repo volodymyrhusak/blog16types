@@ -46,7 +46,7 @@
 
                         <div class='container response'> <!-- container -->
                             <div  class="col-xs-12">
-                                <div class="fb-like" data-href="{% url 'post' postName=post.title%}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+                                <div class="fb-like" data-href="{{request.build_absolute_uri}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
                             </div>
                         </div><!-- end container -->
                         <!-- Response

@@ -75,6 +75,16 @@ def getPost(request, postName):
                        .values('year', 'month', 'sumViews') \
                        .order_by('-sumViews')[:6]
 
+    if request.POST:
+        form = PostCommentModelForm(request.POST)
+        if form.is_valid():
+            saveForm = form.save(commit=False)
+            saveForm.post = post
+            saveForm.save()
+        else:
+            context.update({'formErrors':form})
+    
+
     commentsAll = PostCommentModel.objects.filter(post=post).order_by('-createTime')
     paginator = Paginator(commentsAll, 3)
     countComments = len(commentsAll)
@@ -87,14 +97,6 @@ def getPost(request, postName):
         comments = paginator.page(paginator.num_pages)
     
 
-    if request.POST:
-        form = PostCommentModelForm(request.POST)
-        if form.is_valid():
-            saveForm = form.save(commit=False)
-            saveForm.post = post
-            saveForm.save()
-        else:
-            context.update({'formErrors':form})
             # print(form.errors)
 
     context.update({'post': post,
