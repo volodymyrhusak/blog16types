@@ -168,9 +168,14 @@ EMAIL_HOST = 'smtp.gmail.com'
 
 EMAIL_PORT = 587
 
+EMAIL_PORT_SSL = 465
+
 EMAIL_HOST_PASSWORD = 'wablezyb1992'
 
 EMAIL_USE_TLS = True
+
+EMAIL_USE_SSL = True
+
 
 DEFAULT_FROM_EMAIL = 'JobMice'
 
