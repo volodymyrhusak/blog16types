@@ -54,6 +54,7 @@ def blog(request):
 
 @csrf_protect
 def getPost(request, postName):
+    context = {}
     page = request.GET.get('page')
     post = PostModel.objects.get(title=postName)
 
@@ -84,13 +85,7 @@ def getPost(request, postName):
         comments = paginator.page(1)
     except EmptyPage:
         comments = paginator.page(paginator.num_pages)
-
-    context = {'post': post,
-               'comments': comments,
-               'countComments': countComments,
-               'MY_DATE_FORMAT': settings.MY_DATE_FORMAT,
-               'postsArchive': postsArchive
-               }
+    
 
     if request.POST:
         form = PostCommentModelForm(request.POST)
@@ -102,6 +97,12 @@ def getPost(request, postName):
             context.update({'formErrors':form})
             # print(form.errors)
 
+    context.update({'post': post,
+               'comments': comments,
+               'countComments': countComments,
+               'MY_DATE_FORMAT': settings.MY_DATE_FORMAT,
+               'postsArchive': postsArchive
+               })
     context.update(tabpanelView())
     return render(request, 'post.html', context)
 
