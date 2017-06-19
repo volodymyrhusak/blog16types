@@ -1,4 +1,4 @@
-"""type16 URL Configuration
+    """type16 URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -30,5 +30,5 @@ urlpatterns = [
 
 ]
 if settings.DEBUG is True:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, settings.MEDIA_ROOT)
 

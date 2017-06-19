@@ -150,11 +150,11 @@ STATIC_URL = '/static/'
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-MEDIA_ROOT = '/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 IMAGEFIT_ROOT = ''
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 MY_DATE_FORMAT = "d-m-Y \o H:i"
 
