@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^products/', include('products.urls')),
     url(r'^method/', include('method.urls')),
     url(r'^contacts/', include('contacts.urls')),
-    url(r'^', include('imagefit.urls')),
+    url(r'^media/', include('imagefit.urls')),
 
 ]
 if settings.DEBUG is True:
