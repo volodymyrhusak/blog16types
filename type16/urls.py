@@ -1,4 +1,4 @@
-    """type16 URL Configuration
+"""type16 URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^products/', include('products.urls')),
     url(r'^method/', include('method.urls')),
     url(r'^contacts/', include('contacts.urls')),
-    url(r'^media/', include('imagefit.urls')),
+    url(r'^', include('imagefit.urls')),
 
 ]
 if settings.DEBUG is True:
