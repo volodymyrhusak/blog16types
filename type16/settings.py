@@ -152,7 +152,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_ROOT = 'media'
 
-IMAGEFIT_ROOT = ''
+IMAGEFIT_ROOT = '/'
 
 MEDIA_URL = '/media/'
 
