@@ -95,13 +95,13 @@
                         <div class="post-wrap"> <!-- Post Wrapper -->
                             <div class="media post"> <!-- post wrap -->
                                 <div class="media-left">
-                                    <a href="blog-post.html"> <!-- link to your post single page -->
+                                    <a href="{% url 'post' postName=post.title%}"> <!-- link to your post single page -->
                                       <img class="media-object" src="{{post.image.path|resize:'120x150,crop'}}" alt="..."> <!-- Your Post Image -->
                                     </a>
                                 </div>
                                 <div class="media-body">
                                     <p class="date small">{{post.createTime|date:MY_DATE_FORMAT}}</p>
-                                    <a href="blog-post.html">
+                                    <a href="{% url 'post' postName=post.title%}">
                                         <h5 class="heading media-heading"><strong>{{post.title}}</strong></h5>
                                     </a>
                                     <p class="blog-text">{{post.body|slice:":165"}}</p>
@@ -128,13 +128,13 @@
                         <div class="post-wrap"> <!-- Post Wrapper -->
                             <div class="media post"> <!-- post wrap -->
                                 <div class="media-left">
-                                    <a href="blog-post.html"> <!-- link to your post single page -->
+                                    <a href="{% url 'post' postName=post.title%}"> <!-- link to your post single page -->
                                       <img class="media-object" src="{{post.image.path|resize:'120x150,crop'}}" alt="..."> <!-- Your Post Image -->
                                     </a>
                                 </div>
                                 <div class="media-body">
                                     <p class="date small">{{post.createTime|date:MY_DATE_FORMAT}}</p>
-                                    <a href="blog-post.html">
+                                    <a href="{% url 'post' postName=post.title%}">
                                         <h5 class="heading media-heading"><strong>{{post.title}}</strong></h5>
                                     </a>
                                     <p class="blog-text">{{post.body|slice:":165"}}</p>
