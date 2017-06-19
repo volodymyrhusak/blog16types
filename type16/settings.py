@@ -154,7 +154,7 @@ MEDIA_ROOT = 'media'
 
 IMAGEFIT_ROOT = ''
 
-MEDIA_URL = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 MY_DATE_FORMAT = "d-m-Y \o H:i"
 
