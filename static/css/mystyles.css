@@ -832,3 +832,35 @@ p.help-block.text-danger ul li {
     border-color: #FFCC33;
     margin-bottom: 10px;
 }
+
+/********************************/
+/*        Page 404       */
+/********************************/
+.error-template {
+    margin-top:125px;
+    padding: 40px 15px;
+    text-align: center;
+}
+
+.error-actions {
+    margin-top:25px;
+    margin-bottom:25px;
+}
+
+.error-template h1{
+    font-size: 50px;
+}
+
+.error-template h2{
+    color: #2980b9;
+    margin: 20px 0;
+}
+
+.error-template h1 span{
+    color: #FFCC33;
+    font-size: 70px;
+}
+
+.error-actions .btn {
+    margin-right:10px;
+}

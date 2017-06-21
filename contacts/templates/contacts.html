@@ -53,14 +53,14 @@
 
             <div class="row text-center"> <!-- contact form outer row with centered text-->
                 <div class="col-md-10 col-md-offset-1"> <!-- col 10 with offset 1 to centered -->
-                    <form id="contact-form" method="POST" class="form" name="sentMessage" novalidate> <!-- form wrapper -->
+                    <form id="contact-form" method="POST" class="form" name="sentMessage"> <!-- form wrapper -->
                         {% csrf_token %}
                         {{formErrors.errors.as_json}}
                         <div class="row"> <!-- nested inner row -->
                             <!-- Input your name -->
                             <div class="col-md-4">
                                 <div class="form-group"> <!-- Your name input -->
-                                    <input name="name" type="text" autocomplete="off" class="form-control" placeholder="Ваше ім'я *" id="name" required data-validation-required-message="Введіть Ваше ім'я">
+                                    <input  name="name" type="text" autocomplete="off" class="form-control" placeholder="Ваше ім'я *" id="name" required>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                             <!-- Input your email -->
                             <div class="col-md-4">
                                 <div class="form-group"> <!-- Your email input -->
-                                    <input name="email" type="email" autocomplete="off" class="form-control" placeholder="Ваш Email *" id="email" required data-validation-required-message="Введіть Ваше ім'я email">
+                                    <input name="email" type="email" autocomplete="off" class="form-control" placeholder="Ваш Email *" id="email" required>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                             <!-- Input your Phone no. -->
                             <div class="col-md-4">
                                 <div class="form-group"> <!-- Your email input -->
-                                    <input name="phone" type="text" autocomplete="off" class="form-control" placeholder="Ваш номер телефону *" id="phone" required data-validation-required-message="Введіть Ваш номер телефону">
+                                    <input name="phone" type="text" autocomplete="off" class="form-control" placeholder="Ваш номер телефону *" id="phone" required>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
