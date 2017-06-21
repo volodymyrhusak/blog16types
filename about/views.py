@@ -42,7 +42,7 @@ def aboutProjects(request):
                                                    data['telNum'],
                                                    data['emailId']),
                                  to=[sendEmail])
-            email.send()
+            # email.send()
         else:
             context.update({'formErrors': form})
 

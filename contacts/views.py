@@ -31,7 +31,7 @@ def contacts(request):
                                                    data['email'],
                                                    data['text']),
                                  to=[sendEmail])
-            email.send()
+            # email.send()
         else:
             context.update({'formErrors': form})
 
