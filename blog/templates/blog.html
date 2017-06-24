@@ -93,12 +93,12 @@
                     <div class="col-md-4"> <!-- Blog Sidebar -->
                         <div class="sidebar">
                             <div class="widget search"> <!-- Search Widget -->
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Пошук ...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><span class="fa fa-search"></span></button>
-                                    </span>
-                                </div><!-- /input-group -->
+                                <form class="input-group" action="{% url 'blog'%}">
+                                    <input name="find" type="search" class="form-control" placeholder="Пошук ...">
+                                     <span class="input-group-btn">
+                                         <button class="btn btn-default" type="submit"><span class="fa fa-search"></span></button>
+                                     </span>
+                                </form>
                             </div> <!-- end Search Widget -->
 
                             <div class="widget archive"> <!-- Archive Widget -->

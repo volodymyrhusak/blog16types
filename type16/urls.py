@@ -21,15 +21,15 @@ from django.template import RequestContext
 from django.conf import settings
 from django.contrib import admin
 
-def handler404(request):
-    response = render(RequestContext(request), '404.html')
-    response.status_code = 404
-    return response
-
-def handler500(request):
-    response = render(request, '404.html')
-    response.status_code = 500
-    return response
+# def handler404(request):
+#     response = render(RequestContext(request), '404.html')
+#     response.status_code = 404
+#     return response
+#
+# def handler500(request):
+#     response = render(request, '404.html')
+#     response.status_code = 500
+#     return response
 
 urlpatterns = [
     # url(r'^404/$', TemplateView.as_view(template_name='404.html')),
@@ -42,7 +42,7 @@ urlpatterns = [
     url(r'^method/', include('method.urls')),
     url(r'^contacts/', include('contacts.urls')),
     url(r'^media/', include('imagefit.urls')),
-    url(r'^', handler404),
+    # url(r'^', handler404),
 
 ]
 if settings.DEBUG is True:

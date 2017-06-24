@@ -29,6 +29,7 @@ def blog(request):
             .order_by('-createTime')
     elif find:
         postsAll = PostModel.objects \
+            .filter(title__contains=find) \
             .annotate(Count('postcommentmodel')) \
             .order_by('-createTime')
     else:
