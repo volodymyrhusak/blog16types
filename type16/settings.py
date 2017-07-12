@@ -25,7 +25,7 @@ SECRET_KEY = '4%$7-*n!+a45k-vs%l--_96*$0oz)cstspko4t!b23jda#prg8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['blog16types.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -137,8 +137,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_ROOT = os.path.join(BASE_DIR, "live-static-files", "static-root")
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, "live-static-files", "static-root")
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
@@ -149,17 +149,17 @@ STATICFILES_DIRS = (
 #   os.path.join(BASE_DIR, 'media'),
 # )
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-# MEDIA_ROOT = 'media'
-MEDIA_ROOT = os.path.join(BASE_DIR, "live-static-files", "media-root")
-IMAGEFIT_ROOT = '/'
+MEDIA_ROOT = 'media'
+#MEDIA_ROOT = os.path.join(BASE_DIR, "live-static-files", "media-root")
+IMAGEFIT_ROOT = ''
 
 MEDIA_URL = '/media/'
 
 MY_DATE_FORMAT = "d-m-Y \o H:i"
 
-EMAIL_HOST_USER = 'vovatrap@gmail.com'
+EMAIL_HOST_USER = ''
 
 AUTH_USER_EMAIL_UNIQUE = True
 
@@ -171,7 +171,7 @@ EMAIL_PORT = 587
 
 # EMAIL_PORT_SSL = 465
 
-EMAIL_HOST_PASSWORD = 'wablezyb1992'
+EMAIL_HOST_PASSWORD = ''
 
 EMAIL_USE_TLS = True
 

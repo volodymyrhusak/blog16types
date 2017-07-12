@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 
 
@@ -7,7 +8,7 @@ class ProjectModel(models.Model):
     text = models.CharField(max_length=300, verbose_name='Category name')
     use = models.BooleanField(default=False, blank=True, verbose_name='In use')
     class Meta:
-        verbose_name = "Проект"
+        verbose_name = "Project"
         verbose_name_plural = "Проекти"
 
     def __str__(self):
